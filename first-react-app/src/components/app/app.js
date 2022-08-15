@@ -9,6 +9,7 @@ import './app.css';
 function App() {
    return (
       <div className="app">
+         <WhoAmI name="Egor" surname="Smith" link="https://eu4.paradoxwikis.com/images/c/c9/Province_ID_map.png" />
          <AppInfo />
 
          <div className="search-panel">
