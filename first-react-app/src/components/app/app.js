@@ -7,9 +7,15 @@ import EmployeesAddForm from '../employees-add-form/employees-add-form';
 import './app.css';
 
 function App() {
+
+   const data = [
+      { id: 1, name: 'John', salary: 3500, increase: false },
+      { id: 2, name: 'Alex', salary: 900, increase: false },
+      { id: 3, name: 'Carl', salary: 2000, increase: false },
+   ];
+
    return (
       <div className="app">
-         <WhoAmI name="Egor" surname="Smith" link="https://eu4.paradoxwikis.com/images/c/c9/Province_ID_map.png" />
          <AppInfo />
 
          <div className="search-panel">
@@ -17,7 +23,7 @@ function App() {
             <AppFilter />
          </div>
 
-         <EmployeesList />
+         <EmployeesList data={data} />
          <EmployeesAddForm />
       </div>
    );
