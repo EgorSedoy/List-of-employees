@@ -15,9 +15,9 @@ class App extends Component {
       super(props);
       this.state = {
          data: [
-            { id: uuidv4(), name: 'John', salary: 3500, increase: false },
-            { id: uuidv4(), name: 'Alex', salary: 900, increase: false },
-            { id: uuidv4(), name: 'Carl', salary: 2000, increase: false },
+            { id: uuidv4(), name: 'John', salary: 3500, increase: false, rise: false },
+            { id: uuidv4(), name: 'Alex', salary: 900, increase: false, rise: false },
+            { id: uuidv4(), name: 'Carl', salary: 2000, increase: false, rise: false },
          ]
       }
    }
@@ -35,6 +35,7 @@ class App extends Component {
          name,
          salary,
          increase: false,
+         rise: false,
          id: uuidv4()
       }
       this.setState(({ data }) => {
@@ -45,10 +46,35 @@ class App extends Component {
       });
    }
 
+   onToggleIncrease = (id) => {
+      this.setState(({ data }) => ({
+         data: data.map(item => {
+            if (item.id === id) {
+               return { ...item, increase: !item.increase }
+            }
+            return item;
+         })
+      }))
+   }
+
+   onToggleRise = (id) => {
+      this.setState(({ data }) => ({
+         data: data.map(item => {
+            if (item.id === id) {
+               return { ...item, rise: !item.rise }
+            }
+            return item;
+         })
+      }))
+   }
+
    render() {
+      const employees = this.state.data.length;
+      const increasedEmployees = this.state.data.filter(item => item.increase).length;
+
       return (
          <div className="app" >
-            <AppInfo />
+            <AppInfo employees={employees} increasedEmployees={increasedEmployees} />
 
             <div className="search-panel">
                <SearchPanel />
@@ -57,7 +83,9 @@ class App extends Component {
 
             <EmployeesList
                data={this.state.data}
-               onDelete={this.deleteItem} />
+               onDelete={this.deleteItem}
+               onToggleIncrease={this.onToggleIncrease}
+               onToggleRise={this.onToggleRise} />
             <EmployeesAddForm onAdd={this.addItem} />
          </div>
       );
