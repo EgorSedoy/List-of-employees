@@ -27,5 +27,4 @@ const AppFilter = (props) => {
     )
 }
 
-
 export default AppFilter;
